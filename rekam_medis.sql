@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 13, 2019 at 05:31 PM
+-- Generation Time: Apr 14, 2019 at 08:46 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -79,7 +79,38 @@ CREATE TABLE `pasien` (
 
 INSERT INTO `pasien` (`id`, `no_pasien`, `ktp`, `nama`, `gender`, `tempat_lahir`, `tanggal_lahir`, `phone`, `goldarah`, `alamat`, `pekerjaan`, `tgl_daftar`, `hapus`, `updated_at`, `created_at`) VALUES
 (1, 'MA0001', '3275071305980018', 'Wahyu Arief Trianto', 'L', 'Jakarta', '1998-05-13', '085219842984', 'O', 'Jl. Koperpu 31, Bekasi', 'Karyawan Swasta', '2019-04-07', 0, '2019-04-07 19:26:15', '2019-04-07 11:12:30'),
-(2, 'MA0002', '3772131204982029', 'Yona Hergalina', 'P', 'Bandung', '1998-04-12', '089832482384', 'O', 'Jakarta', 'Mahasiswa', '2019-04-07', 1, '2019-04-07 19:08:42', '2019-04-07 19:08:42');
+(2, 'MA0002', '3772131204982029', 'Yona Hergalina', 'P', 'Bandung', '1998-04-12', '089832482384', 'O', 'Jakarta', 'Mahasiswa', '2019-04-07', 0, '2019-04-07 19:08:42', '2019-04-07 19:08:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penanggung`
+--
+
+CREATE TABLE `penanggung` (
+  `id` int(11) NOT NULL,
+  `id_pasien` int(11) NOT NULL,
+  `ktp` varchar(32) NOT NULL,
+  `nama` varchar(64) NOT NULL,
+  `gender` varchar(1) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `pekerjaan` varchar(32) NOT NULL,
+  `perusahaan` varchar(32) NOT NULL,
+  `hubungan` varchar(32) NOT NULL,
+  `hapus` tinyint(1) NOT NULL,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `penanggung`
+--
+
+INSERT INTO `penanggung` (`id`, `id_pasien`, `ktp`, `nama`, `gender`, `phone`, `alamat`, `pekerjaan`, `perusahaan`, `hubungan`, `hapus`, `updated_at`, `created_at`) VALUES
+(1, 1, '32750701234298193', 'Mulyanto', 'L', '088290200669', 'Komp. PU Sapta Taruna 4, Blok D No. 37', 'Karyawan Swasta', 'PT Wijaya Karya', 'Ayah', 0, '2019-04-14 11:53:39', '2019-04-14 11:53:39'),
+(3, 1, '3772131204982029', 'Yona Hergalina', 'P', '089832482384', 'Jakarta Timur', 'Mahasiswa', 'Unsada', 'Teman', 1, '2019-04-14 13:29:15', '2019-04-14 12:45:23'),
+(4, 2, '3275071305980019', 'Wahyu Arief Trianto', 'L', '085219842984', 'Bantargebang, Bekasi', 'Karyawan Swasta', 'PT Mitra Media Cakrawala', 'Teman', 0, '2019-04-14 13:24:39', '2019-04-14 12:56:31');
 
 -- --------------------------------------------------------
 
@@ -131,6 +162,13 @@ ALTER TABLE `pasien`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `penanggung`
+--
+ALTER TABLE `penanggung`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_pasien` (`id_pasien`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -153,10 +191,26 @@ ALTER TABLE `pasien`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `penanggung`
+--
+ALTER TABLE `penanggung`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `penanggung`
+--
+ALTER TABLE `penanggung`
+  ADD CONSTRAINT `penanggung_ibfk_1` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
