@@ -34,6 +34,16 @@ class Mdata extends CI_Model {
 		$query = $this->db->get('pasien');
     return !empty($query)?$query->result_array():false;
 	}
+	public function penanggung($no_pasien)
+	{
+		$this->db->select('penanggung.id, penanggung.ktp, penanggung.nama, penanggung.pekerjaan, penanggung.gender, penanggung.phone, penanggung.alamat, perusahaan, hubungan, pasien.nama as nama_pasien, pasien.no_pasien');
+		$this->db->from('penanggung');
+		$this->db->join('pasien', 'penanggung.id_pasien = pasien.id');
+		$this->db->where('pasien.no_pasien', $no_pasien);
+		$this->db->where('penanggung.hapus', '0');
+		$query = $this->db->get();
+    return !empty($query)?$query->result_array():false;
+	}
 	public function no_pasien()
 	{
 		$this->db->order_by('id', 'DESC');
@@ -71,6 +81,13 @@ class Mdata extends CI_Model {
 		$query = $this->db->get('pasien');
     return !empty($query)?$query->row_array():false;
 	}
+	public function per_penanggung($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->where('hapus', '0');
+		$query = $this->db->get('penanggung');
+    return !empty($query)?$query->row_array():false;
+	}
 	public function check_pegawai($id)
 	{
 		$this->db->where('id', $id);
@@ -99,6 +116,17 @@ class Mdata extends CI_Model {
 		$this->db->where('no_pasien', $id);
 		$this->db->where('hapus', '0');
 		$query = $this->db->get('pasien');
+    return ($query->num_rows() > 0)?true:false;
+	}
+	public function check_penanggung($no_pasien, $id)
+	{
+		$this->db->select('penanggung.id, pasien.no_pasien');
+		$this->db->from('penanggung');
+		$this->db->join('pasien', 'penanggung.id_pasien = pasien.id');
+		$this->db->where('pasien.no_pasien', $no_pasien);
+		$this->db->where('penanggung.id', $id);
+		$this->db->where('penanggung.hapus', '0');
+		$query = $this->db->get();
     return ($query->num_rows() > 0)?true:false;
 	}
 	public function count_data($table)

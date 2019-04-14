@@ -22,4 +22,8 @@ class Mupdate extends CI_Model {
 	{
 		return ($this->db->update('pasien', $data, ['no_pasien' => $id]))?true:false;
 	}
+	public function penanggung($data, $id)
+	{
+		return ($this->db->update('penanggung', $data, ['id' => $id]))?true:false;
+	}
 }

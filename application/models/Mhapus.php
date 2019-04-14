@@ -18,4 +18,8 @@ class Mhapus extends CI_Model {
 	{
 		return ($this->db->update('pasien', ['hapus' => '1'], ['no_pasien' => $id]))?true:false;
 	}
+	public function penanggung($id)
+	{
+		return ($this->db->update('penanggung', ['hapus' => '1'], ['id' => $id]))?true:false;
+	}
 }

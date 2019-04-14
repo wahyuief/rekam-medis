@@ -55,4 +55,16 @@ class Hapus extends CI_Controller {
 			redirect(base_url('data/pasien'));
 		}
 	}
+	public function penanggung()
+	{
+		$no_pasien = $this->uri->segment(3);
+		$id = $this->uri->segment(4);
+		if ($this->mdata->check_penanggung($no_pasien, $id) === FALSE) {
+			redirect(base_url('penanggung/pasien/').$no_pasien.'/'.$id);
+		}
+
+		if ($this->mhapus->penanggung($id) === true) {
+			redirect(base_url('penanggung/pasien/').$no_pasien.'/'.$id);
+		}
+	}
 }

@@ -172,4 +172,45 @@ class Edit extends CI_Controller {
 			}
 		}
 	}
+	public function penanggung()
+	{
+		$no_pasien = $this->uri->segment(3);
+		$id = $this->uri->segment(4);
+		if ($this->mdata->check_penanggung($no_pasien, $id) === FALSE) {
+			redirect(base_url('data/pasien'));
+		}
+		$pasien = $this->mdata->per_pasien($no_pasien);
+		$this->form_validation->set_rules('ktp', 'Nomor KTP', 'trim|required', array('required' => 'Nomor KTP Wajib Diisi'));
+		$this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required', array('required' => 'Nama Lengkap Wajib Diisi'));
+		$this->form_validation->set_rules('gender', 'Jenis Kelamin', 'trim|required', array('required' => 'Jenis Kelamin Wajib Diisi'));
+		$this->form_validation->set_rules('phone', 'Nomor Telpon', 'trim|required', array('required' => 'Nomor Telpon Wajib Diisi'));
+		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required', array('required' => 'Alamat Lengkap Wajib Diisi'));
+		$this->form_validation->set_rules('pekerjaan', 'Pekerjaan', 'trim|required', array('required' => 'Pekerjaan Wajib Diisi'));
+		$this->form_validation->set_rules('perusahaan', 'Perusahaan', 'trim|required', array('required' => 'Perusahaan Wajib Diisi'));
+		$this->form_validation->set_rules('hubungan', 'Hubungan', 'trim|required', array('required' => 'Hubungan Wajib Diisi'));
+		if ($this->form_validation->run() === FALSE) {
+			$data = array(
+				'page' => 'edit_penanggung_pasien',
+				'title' => 'Edit Penanggung Pasien',
+				'data' => $this->mdata->per_penanggung($id),
+				'pasien' => $pasien
+			);
+			$this->load->view('layout_dashboard', $data);
+		} else {
+			$input = array(
+				'ktp' => $this->input->post('ktp'),
+				'nama' => $this->input->post('nama'),
+				'gender' => $this->input->post('gender'),
+				'phone' => $this->input->post('phone'),
+				'alamat' => $this->input->post('alamat'),
+				'pekerjaan' => $this->input->post('pekerjaan'),
+				'perusahaan' => $this->input->post('perusahaan'),
+				'hubungan' => $this->input->post('hubungan'),
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+			if ($this->mupdate->penanggung($input, $id) === true) {
+				redirect(base_url('penanggung/pasien/').$no_pasien.'/'.$id);
+			}
+		}
+	}
 }

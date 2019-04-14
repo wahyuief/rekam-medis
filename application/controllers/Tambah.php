@@ -150,4 +150,43 @@ class Tambah extends CI_Controller {
 			}
 		}
 	}
+	public function penanggung($no_pasien)
+	{
+		if (empty($no_pasien)) {
+			redirect(base_url('data/pasien'));
+		}
+		$pasien = $this->mdata->per_pasien($no_pasien);
+		$this->form_validation->set_rules('ktp', 'Nomor KTP', 'trim|required|is_unique[penanggung.ktp]', array('required' => 'Nomor KTP Wajib Diisi', 'is_unique' => 'Nomor KTP Sudah Terdaftar'));
+		$this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required', array('required' => 'Nama Lengkap Wajib Diisi'));
+		$this->form_validation->set_rules('gender', 'Jenis Kelamin', 'trim|required', array('required' => 'Jenis Kelamin Wajib Diisi'));
+		$this->form_validation->set_rules('phone', 'Nomor Telpon', 'trim|required', array('required' => 'Nomor Telpon Wajib Diisi'));
+		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required', array('required' => 'Alamat Lengkap Wajib Diisi'));
+		$this->form_validation->set_rules('pekerjaan', 'Pekerjaan', 'trim|required', array('required' => 'Pekerjaan Wajib Diisi'));
+		$this->form_validation->set_rules('perusahaan', 'Perusahaan', 'trim|required', array('required' => 'Perusahaan Wajib Diisi'));
+		$this->form_validation->set_rules('hubungan', 'Hubungan', 'trim|required', array('required' => 'Hubungan Wajib Diisi'));
+		if ($this->form_validation->run() === FALSE) {
+			$data = array(
+				'page' => 'tambah_penanggung_pasien',
+				'title' => 'Tambah Penanggung Pasien',
+				'data' => $this->mdata->penanggung($no_pasien),
+				'pasien' => $pasien
+			);
+			$this->load->view('layout_dashboard', $data);
+		} else {
+			$input = array(
+				'id_pasien' => $pasien['id'],
+				'ktp' => $this->input->post('ktp'),
+				'nama' => $this->input->post('nama'),
+				'gender' => $this->input->post('gender'),
+				'phone' => $this->input->post('phone'),
+				'alamat' => $this->input->post('alamat'),
+				'pekerjaan' => $this->input->post('pekerjaan'),
+				'perusahaan' => $this->input->post('perusahaan'),
+				'hubungan' => $this->input->post('hubungan')
+			);
+			if ($this->mtambah->penanggung($input) === true) {
+				redirect(base_url('penanggung/pasien/'.$pasien['no_pasien']));
+			}
+		}
+	}
 }

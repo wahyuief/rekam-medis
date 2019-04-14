@@ -18,4 +18,8 @@ class Mtambah extends CI_Model {
 	{
 		return ($this->db->insert('pasien', $data))?true:false;
 	}
+	public function penanggung($data)
+	{
+		return ($this->db->insert('penanggung', $data))?true:false;
+	}
 }
