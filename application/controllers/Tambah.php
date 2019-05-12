@@ -112,7 +112,7 @@ class Tambah extends CI_Controller {
 	{
 		$no_pasien = substr($this->mdata->no_pasien(), -1);
 		$no_pasien = $no_pasien + 1;
-		$no_pasien = 'MA'.str_pad($no_pasien, 4, '0', STR_PAD_LEFT);
+		$no_pasien = 'MHS'.str_pad($no_pasien, 4, '0', STR_PAD_LEFT);
 		$this->form_validation->set_rules('no_pasien', 'Nomor Pasien', 'trim|required|is_unique[pasien.no_pasien]', array('required' => 'Nomor Pasien Wajib Diisi', 'is_unique' => 'Nomor Induk Pegawai Sudah Terdaftar'));
 		$this->form_validation->set_rules('ktp', 'Nomor KTP', 'trim|required|is_unique[pasien.ktp]', array('required' => 'Nomor KTP Wajib Diisi', 'is_unique' => 'Nomor KTP Sudah Terdaftar'));
 		$this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required', array('required' => 'Nama Lengkap Wajib Diisi'));

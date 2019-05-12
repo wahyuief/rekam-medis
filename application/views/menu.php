@@ -3,10 +3,10 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+          <i class="fas fa-clinic-medical"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Medic Allya</div>
+        <div class="sidebar-brand-text mx-3">MHS</div>
       </a>
 
       <!-- Divider -->
@@ -18,23 +18,24 @@
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
+
       <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url('medical-checkup') ?>">
+        <a class="nav-link" href="<?php echo base_url('medical/checkup') ?>">
           <i class="fas fa-fw fa-notes-medical"></i>
-          <span>Medical Check Up</span></a>
+          <span>Medical Checkup</span></a>
       </li>
-      <li class="nav-item active">
+      <!-- <li class="nav-item active">
         <a class="nav-link" href="<?php echo base_url('rekam-medis') ?>">
           <i class="fas fa-fw fa-file-medical"></i>
           <span>Rekam Medis</span></a>
-      </li>
+      </li> -->
 
       <!-- Divider -->
       <hr class="sidebar-divider">
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Data
+        Rekam Medis
       </div>
 
       <li class="nav-item">

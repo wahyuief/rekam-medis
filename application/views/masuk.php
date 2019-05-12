@@ -33,4 +33,7 @@
         </div>
       </div>
     </div>
+    <div class="text-center">
+      <a href="report" class="mt-4 btn btn-primary shadow-lg">Lihat Laporan Checkup Pasien</a>
+    </div>
   </div>

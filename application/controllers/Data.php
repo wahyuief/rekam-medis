@@ -50,4 +50,46 @@ class Data extends CI_Controller {
 		);
 		$this->load->view('layout_dashboard', $data);
 	}
+	public function rontgen()
+	{
+		$data = array(
+			'page' => 'rontgen',
+			'title' => 'Rontgen',
+			'data' => $this->mdata->rontgen()
+		);
+		$this->load->view('layout_dashboard', $data);
+	}
+	public function spirometri()
+	{
+		$data = array(
+			'page' => 'spirometri',
+			'title' => 'Spirometri',
+			'data' => $this->mdata->spirometri()
+		);
+		$this->load->view('layout_dashboard', $data);
+	}
+	public function audiometri()
+	{
+		$data = array(
+			'page' => 'audiometri',
+			'title' => 'Audiometri',
+			'data' => $this->mdata->audiometri()
+		);
+		$this->load->view('layout_dashboard', $data);
+	}
+	public function ekg()
+	{
+		$data = array(
+			'page' => 'ekg',
+			'title' => 'EKG',
+			'data' => $this->mdata->ekg()
+		);
+		$this->load->view('layout_dashboard', $data);
+	}
+	public function nama_pasien()
+	{
+		$nama = $this->input->get('nama');
+		$data = $this->mdata->cari_pasien($nama);
+		echo json_encode($data);
+	}
 }
