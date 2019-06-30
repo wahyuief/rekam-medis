@@ -22,8 +22,12 @@ class Mtambah extends CI_Model {
 	{
 		return ($this->db->insert('penanggung', $data))?true:false;
 	}
-	public function checkup($data)
+	public function checkup($table, $data)
 	{
-		return ($this->db->insert('checkup', $data))?true:false;
+		return ($this->db->insert($table, $data))?true:false;
+	}
+	public function rekam_medis($data)
+	{
+		return ($this->db->insert('rekammedis', $data))?true:false;
 	}
 }

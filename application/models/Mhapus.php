@@ -22,4 +22,8 @@ class Mhapus extends CI_Model {
 	{
 		return ($this->db->update('penanggung', ['hapus' => '1'], ['id' => $id]))?true:false;
 	}
+	public function rekam_medis($id)
+	{
+		return ($this->db->update('rekammedis', ['hapus' => '1'], ['id' => $id]))?true:false;
+	}
 }

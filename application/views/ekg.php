@@ -20,7 +20,7 @@
                       <th width="10">Gender</th>
                       <th width="10">Tgl Daftar</th>
                       <th width="10">Status</th>
-                      <th width="10">Update</th>
+                      <th width="10"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -31,8 +31,18 @@
                         <td align="center">'.$row['goldarah'].'</td>
                         <td align="center">'.$row['gender'].'</td>
                         <td align="center">'.$row['tanggal'].'</td>
-                        <td align="center">'.$row['status_ekg'].'</td>
-                        <td align="center"><a href="'.base_url('edit/ekg/').$row['no_pasien'].'" class="btn btn-circle btn-primary text-white"><i class="fa fa-pen"></i></a></td>
+                        <td align="center">'.$row['status'].'</td>
+                        <td align="center">
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Options
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="'.base_url('edit/ekg/').$row['no_pasien']."/".$row['id_ekg'].'">Edit</a>
+                              <a class="dropdown-item" href="'.base_url('data/print_ekg/').$row['no_pasien']."/".$row['id_ekg'].'">Print</a>
+                            </div>
+                          </div>
+                        </td>
                       </tr>';
                     } ?>
                   </tbody>

@@ -92,4 +92,36 @@ class Data extends CI_Controller {
 		$data = $this->mdata->cari_pasien($nama);
 		echo json_encode($data);
 	}
+	public function print_rontgen($pasien, $id)
+	{
+		$this->load->library('pdf');
+		$data['rontgen'] = $this->mdata->per_rontgen($pasien, $id);
+    $this->pdf->setPaper('A4', 'potrait');
+    $this->pdf->filename = "report-data-rekam-medis.pdf";
+    $this->pdf->load_view('print_rontgen', $data);
+	}
+	public function print_spirometri($pasien, $id)
+	{
+		$this->load->library('pdf');
+		$data['spirometri'] = $this->mdata->per_spirometri($pasien, $id);
+    $this->pdf->setPaper('A4', 'potrait');
+    $this->pdf->filename = "report-data-rekam-medis.pdf";
+    $this->pdf->load_view('print_spirometri', $data);
+	}
+	public function print_audiometri($pasien, $id)
+	{
+		$this->load->library('pdf');
+		$data['audiometri'] = $this->mdata->per_audiometri($pasien, $id);
+    $this->pdf->setPaper('A4', 'potrait');
+    $this->pdf->filename = "report-data-rekam-medis.pdf";
+    $this->pdf->load_view('print_audiometri', $data);
+	}
+	public function print_ekg($pasien, $id)
+	{
+		$this->load->library('pdf');
+		$data['ekg'] = $this->mdata->per_ekg($pasien, $id);
+    $this->pdf->setPaper('A4', 'potrait');
+    $this->pdf->filename = "report-data-rekam-medis.pdf";
+    $this->pdf->load_view('print_ekg', $data);
+	}
 }

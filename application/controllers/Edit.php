@@ -213,4 +213,158 @@ class Edit extends CI_Controller {
 			}
 		}
 	}
+	public function rontgen($no_pasien, $id) {
+		if (!$this->mdata->per_rontgen($no_pasien, $id)) {
+			redirect(base_url('data/rontgen'));
+		}
+		$pasien = $this->mdata->per_pasien($no_pasien);
+		$this->form_validation->set_rules('cor', 'cor', 'trim|required', array('required' => 'Cor Wajib Diisi'));
+		$this->form_validation->set_rules('pulmo', 'pulmo', 'trim|required', array('required' => 'Pulmo Wajib Diisi'));
+		$this->form_validation->set_rules('costae', 'costae', 'trim|required', array('required' => 'Costae Wajib Diisi'));
+		$this->form_validation->set_rules('sinus', 'sinus', 'trim|required', array('required' => 'Sinus Wajib Diisi'));
+		$this->form_validation->set_rules('diapragma', 'diapragma', 'trim|required', array('required' => 'Diapragma Wajib Diisi'));
+		$this->form_validation->set_rules('jenis_periksa', 'jenis_periksa', 'trim|required', array('required' => 'Jenis Periksa Wajib Diisi'));
+		$this->form_validation->set_rules('kesan', 'kesan', 'trim|required', array('required' => 'Kesan Wajib Diisi'));
+		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required', array('required' => 'Keterangan Wajib Diisi'));
+		if ($this->form_validation->run() === FALSE) {
+			$data = array(
+				'page' => 'edit_rontgen',
+				'title' => 'Data Rontgen',
+				'data' => $this->mdata->per_rontgen($no_pasien, $id),
+				'pasien' => $pasien,
+				'dokter' => $this->mdata->dokter()
+			);
+			$this->load->view('layout_dashboard', $data);
+		} else {
+			$input = array(
+				'cor' => $this->input->post('cor'),
+				'pulmo' => $this->input->post('pulmo'),
+				'costae' => $this->input->post('costae'),
+				'sinus' => $this->input->post('sinus'),
+				'diapragma' => $this->input->post('diapragma'),
+				'jenis_periksa' => $this->input->post('jenis_periksa'),
+				'kesan' => $this->input->post('kesan'),
+				'keterangan' => $this->input->post('keterangan'),
+				'status' => $this->input->post('status'),
+				'id_dokter' => $this->input->post('dokter')
+			);
+			print_r($input);
+			// die();
+			if ($this->mupdate->rontgen($input, $id) === true) {
+				redirect(base_url('edit/rontgen/').$no_pasien.'/'.$id);
+			}
+		}
+	}
+	public function spirometri($no_pasien, $id) {
+		if (!$this->mdata->per_spirometri($no_pasien, $id)) {
+			redirect(base_url('data/spirometri'));
+		}
+		$pasien = $this->mdata->per_pasien($no_pasien);
+		$this->form_validation->set_rules('nilai_prediksi', 'nilai_prediksi', 'trim|required', array('required' => 'Nilai Prediksi Wajib Diisi'));
+		$this->form_validation->set_rules('kvp', 'kvp', 'trim|required', array('required' => 'Kapasitas Vital Paksa Wajib Diisi'));
+		$this->form_validation->set_rules('vep', 'vep', 'trim|required', array('required' => 'Volume Ekspirasi Paksa Detik Pertama Wajib Diisi'));
+		$this->form_validation->set_rules('ape', 'ape', 'trim|required', array('required' => 'Arus Puncak Ekspirasi Wajib Diisi'));
+		$this->form_validation->set_rules('kesan', 'kesan', 'trim|required', array('required' => 'Kesan Wajib Diisi'));
+		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required', array('required' => 'Keterangan Wajib Diisi'));
+		if ($this->form_validation->run() === FALSE) {
+			$data = array(
+				'page' => 'edit_spirometri',
+				'title' => 'Data Spirometri',
+				'data' => $this->mdata->per_spirometri($no_pasien, $id),
+				'pasien' => $pasien,
+				'dokter' => $this->mdata->dokter()
+			);
+			$this->load->view('layout_dashboard', $data);
+		} else {
+			$input = array(
+				'nilai_prediksi' => $this->input->post('nilai_prediksi'),
+				'kvp' => $this->input->post('kvp'),
+				'vep' => $this->input->post('vep'),
+				'ape' => $this->input->post('ape'),
+				'kesan' => $this->input->post('kesan'),
+				'keterangan' => $this->input->post('keterangan'),
+				'status' => $this->input->post('status'),
+				'id_dokter' => $this->input->post('dokter')
+			);
+			if ($this->mupdate->spirometri($input, $id) === true) {
+				redirect(base_url('edit/spirometri/').$no_pasien.'/'.$id);
+			}
+		}
+	}
+	public function audiometri($no_pasien, $id) {
+		if (!$this->mdata->per_audiometri($no_pasien, $id)) {
+			redirect(base_url('data/audiometri'));
+		}
+		$pasien = $this->mdata->per_pasien($no_pasien);
+		$this->form_validation->set_rules('irama', 'irama', 'trim|required', array('required' => 'Irama Wajib Diisi'));
+		$this->form_validation->set_rules('rate', 'rate', 'trim|required', array('required' => 'Rate Wajib Diisi'));
+		$this->form_validation->set_rules('axis', 'axis', 'trim|required', array('required' => 'Axis Wajib Diisi'));
+		$this->form_validation->set_rules('kelainan', 'kelainan', 'trim|required', array('required' => 'Kelainan Wajib Diisi'));
+		$this->form_validation->set_rules('kesimpulan', 'kesimpulan', 'trim|required', array('required' => 'Kesimpulan Wajib Diisi'));
+		$this->form_validation->set_rules('saran', 'saran', 'trim|required', array('required' => 'Saran Wajib Diisi'));
+		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required', array('required' => 'Keterangan Wajib Diisi'));
+		if ($this->form_validation->run() === FALSE) {
+			$data = array(
+				'page' => 'edit_audiometri',
+				'title' => 'Data Audiometri',
+				'data' => $this->mdata->per_audiometri($no_pasien, $id),
+				'pasien' => $pasien,
+				'dokter' => $this->mdata->dokter()
+			);
+			$this->load->view('layout_dashboard', $data);
+		} else {
+			$input = array(
+				'irama' => $this->input->post('irama'),
+				'rate' => $this->input->post('rate'),
+				'axis' => $this->input->post('axis'),
+				'kelainan' => $this->input->post('kelainan'),
+				'kesimpulan' => $this->input->post('kesimpulan'),
+				'saran' => $this->input->post('saran'),
+				'keterangan' => $this->input->post('keterangan'),
+				'status' => $this->input->post('status'),
+				'id_dokter' => $this->input->post('dokter')
+			);
+			if ($this->mupdate->audiometri($input, $id) === true) {
+				redirect(base_url('edit/audiometri/').$no_pasien.'/'.$id);
+			}
+		}
+	}
+	public function ekg($no_pasien, $id) {
+		if (!$this->mdata->per_ekg($no_pasien, $id)) {
+			redirect(base_url('data/ekg'));
+		}
+		$pasien = $this->mdata->per_pasien($no_pasien);
+		$this->form_validation->set_rules('irama', 'irama', 'trim|required', array('required' => 'Irama Wajib Diisi'));
+		$this->form_validation->set_rules('rate', 'rate', 'trim|required', array('required' => 'Rate Wajib Diisi'));
+		$this->form_validation->set_rules('axis', 'axis', 'trim|required', array('required' => 'Axis Wajib Diisi'));
+		$this->form_validation->set_rules('kelainan', 'kelainan', 'trim|required', array('required' => 'Kelainan Wajib Diisi'));
+		$this->form_validation->set_rules('kesimpulan', 'kesimpulan', 'trim|required', array('required' => 'Kesimpulan Wajib Diisi'));
+		$this->form_validation->set_rules('saran', 'saran', 'trim|required', array('required' => 'Saran Wajib Diisi'));
+		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required', array('required' => 'Keterangan Wajib Diisi'));
+		if ($this->form_validation->run() === FALSE) {
+			$data = array(
+				'page' => 'edit_ekg',
+				'title' => 'Data EKG',
+				'data' => $this->mdata->per_ekg($no_pasien, $id),
+				'pasien' => $pasien,
+				'dokter' => $this->mdata->dokter()
+			);
+			$this->load->view('layout_dashboard', $data);
+		} else {
+			$input = array(
+				'irama' => $this->input->post('irama'),
+				'rate' => $this->input->post('rate'),
+				'axis' => $this->input->post('axis'),
+				'kelainan' => $this->input->post('kelainan'),
+				'kesimpulan' => $this->input->post('kesimpulan'),
+				'saran' => $this->input->post('saran'),
+				'keterangan' => $this->input->post('keterangan'),
+				'status' => $this->input->post('status'),
+				'id_dokter' => $this->input->post('dokter')
+			);
+			if ($this->mupdate->ekg($input, $id) === true) {
+				redirect(base_url('edit/ekg/').$no_pasien.'/'.$id);
+			}
+		}
+	}
 }

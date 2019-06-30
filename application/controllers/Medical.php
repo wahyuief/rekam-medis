@@ -26,41 +26,32 @@ class Medical extends CI_Controller {
 				);
 			}
 		}
-		$no_pasien = $this->input->post('no_pasien');
+		$namapasien = $this->input->post('namapasien');
 		$rontgen = isset($mcup['rontgen']) ? '1' : '0';
 		$spirometri = isset($mcup['spirometri']) ? '1' : '0';
 		$audiometri = isset($mcup['audiometri']) ? '1' : '0';
 		$ekg = isset($mcup['ekg']) ? '1' : '0';
-		$this->form_validation->set_rules('no_pasien', 'Nama Pasien', 'trim|required');
+		$this->form_validation->set_rules('namapasien', 'Nama Pasien', 'trim|required');
 		if ($this->form_validation->run() === FALSE) {
 			$data = array(
 				'page' => 'medical_checkup',
-				'title' => 'Medical Checkup'
+				'title' => 'Medical Checkup',
+				'pasien' => $this->mdata->pasien()
 			);
 			$this->load->view('layout_dashboard', $data);
 		} else {
-			$id = $this->mdata->per_pasien($no_pasien)['id'];
+			$id = $this->mdata->per_nama_pasien($namapasien)['id'];
 			$input = array(
 				'id_pasien' => $id,
-				'rontgen' => $rontgen,
-				'spirometri' => $spirometri,
-				'audiometri' => $audiometri,
-				'ekg' => $ekg,
-				'status_rontgen' => 'Proses',
-				'status_spirometri' => 'Proses',
-				'status_audiometri' => 'Proses',
-				'status_ekg' => 'Proses',
-				'tanggal' => date('Y-m-d')
+				'id_dokter' => 1,
+				'status' => 'Pending',
+				'tanggal' => date('Y-m-d H:i:s')
 			);
-			if ($this->mdata->count_checkup($no_pasien) === FALSE) {
-				if ($this->mtambah->checkup($input) === true) {
-					redirect(base_url('medical/checkup'));
-				}
-			} else {
-				if ($this->mupdate->checkup($input, $id) === true) {
-					redirect(base_url('medical/checkup'));
-				}
-			}
+			if($rontgen > 0 ? $this->mtambah->checkup('rontgen', $input) : false);
+			if($audiometri > 0 ? $this->mtambah->checkup('audiometri', $input) : false);
+			if($spirometri > 0 ? $this->mtambah->checkup('spirometri', $input) : false);
+			if($ekg > 0 ? $this->mtambah->checkup('ekg', $input) : false);
+			redirect(base_url('medical/checkup'));
 		}
 	}
 }

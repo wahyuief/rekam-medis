@@ -28,18 +28,18 @@
             <table class="table table-bordered table-striped text-center">
               <tr>
                 <th>Nama</th>
-                <th width="120">Rontgen</th>
-                <th width="120">Spirometri</th>
-                <th width="120">Audiotmetri</th>
-                <th width="120">Ekg</th>
+                <th width="100">Rontgen</th>
+                <th width="100">Spirometri</th>
+                <th width="100">Audiotmetri</th>
+                <th width="100">Ekg</th>
               </tr>
-              <?php if ($pasien) {
+              <?php if ($pasien && isset($rontgen) || isset($spirometri) || isset($audiometri) || isset($ekg)) {
                 echo '<tr>
                   <td>'.$pasien['nama'].'</td>
-                  <td>'.($pasien['status_rontgen'] == 'Selesai' ? '<a href="#">'.$pasien['status_rontgen'].'</a>' : $pasien['status_rontgen']).'</td>
-                  <td>'.($pasien['status_spirometri'] == 'Selesai' ? '<a href="#">'.$pasien['status_spirometri'].'</a>' : $pasien['status_spirometri']).'</td>
-                  <td>'.($pasien['status_audiometri'] == 'Selesai' ? '<a href="#">'.$pasien['status_audiometri'].'</a>' : $pasien['status_audiometri']).'</td>
-                  <td>'.($pasien['status_ekg'] == 'Selesai' ? '<a href="#">'.$pasien['status_ekg'].'</a>' : $pasien['status_ekg']).'</td>
+                  <td>'.($rontgen['status'] == 'Selesai' ? '<a href="rontgen/'.$pasien['ktp'].'">'.$rontgen['status'].'</a>' : $rontgen['status']).'</td>
+                  <td>'.($spirometri['status'] == 'Selesai' ? '<a href="spirometri/'.$pasien['ktp'].'">'.$spirometri['status'].'</a>' : $spirometri['status']).'</td>
+                  <td>'.($audiometri['status'] == 'Selesai' ? '<a href="audiometri/'.$pasien['ktp'].'">'.$audiometri['status'].'</a>' : $audiometri['status']).'</td>
+                  <td>'.($ekg['status'] == 'Selesai' ? '<a href="ekg/'.$pasien['ktp'].'">'.$ekg['status'].'</a>' : $ekg['status']).'</td>
                 </tr>';
               } else {
                 echo '<tr><td colspan="5">Data Pasien Tidak Ditemukan</td></tr>';

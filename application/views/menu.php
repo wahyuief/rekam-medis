@@ -4,7 +4,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
-          <i class="fas fa-clinic-medical"></i>
+          <i class="fas fa-stethoscope"></i>
         </div>
         <div class="sidebar-brand-text mx-3">MHS</div>
       </a>
@@ -24,18 +24,18 @@
           <i class="fas fa-fw fa-notes-medical"></i>
           <span>Medical Checkup</span></a>
       </li>
-      <!-- <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url('rekam-medis') ?>">
-          <i class="fas fa-fw fa-file-medical"></i>
+      <li class="nav-item active">
+        <a class="nav-link" href="<?php echo base_url('rekam/medis') ?>">
+          <i class="fas fa-fw fa-plus"></i>
           <span>Rekam Medis</span></a>
-      </li> -->
+      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Rekam Medis
+        Data
       </div>
 
       <li class="nav-item">

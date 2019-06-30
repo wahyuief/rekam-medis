@@ -30,4 +30,24 @@ class Mupdate extends CI_Model {
 	{
 		return ($this->db->update('checkup', $data, ['id_pasien' => $id]))?true:false;
 	}
+	public function rekam_medis($data, $id)
+	{
+		return ($this->db->update('rekammedis', $data, ['id' => $id]))?true:false;
+	}
+	public function rontgen($data, $id)
+	{
+		return ($this->db->update('rontgen', $data, ['id' => $id]))?true:false;
+	}
+	public function spirometri($data, $id)
+	{
+		return ($this->db->update('spirometri', $data, ['id' => $id]))?true:false;
+	}
+	public function audiometri($data, $id)
+	{
+		return ($this->db->update('audiometri', $data, ['id' => $id]))?true:false;
+	}
+	public function ekg($data, $id)
+	{
+		return ($this->db->update('ekg', $data, ['id' => $id]))?true:false;
+	}
 }

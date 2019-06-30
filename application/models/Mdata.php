@@ -44,6 +44,31 @@ class Mdata extends CI_Model {
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
 	}
+	public function rekam_medis()
+	{
+		$this->db->select('no_pasien, pasien.nama as nama_pasien, users.nama as nama_dokter, keluhan, diagnosa, tindakan, rekammedis.tanggal as tgl_daftar, obat.nama as nama_obat');
+		$this->db->from('rekammedis');
+		$this->db->join('pasien', 'rekammedis.id_pasien = pasien.id');
+		$this->db->join('users', 'rekammedis.id_dokter = users.id');
+		$this->db->join('obat', 'rekammedis.id_obat = obat.id');
+		$this->db->where('users.jabatan', 'Dokter');
+		$this->db->where('rekammedis.hapus', '0');
+		$query = $this->db->get();
+    return !empty($query)?$query->result_array():false;
+	}
+	public function rekam_medis_per_pasien($no_pasien)
+	{
+		$this->db->select('rekammedis.id, no_pasien, pasien.nama as nama_pasien, users.nama as nama_dokter, keluhan, diagnosa, tindakan, rekammedis.tanggal as tgl_daftar, obat.nama as nama_obat');
+		$this->db->from('rekammedis');
+		$this->db->join('pasien', 'rekammedis.id_pasien = pasien.id');
+		$this->db->join('users', 'rekammedis.id_dokter = users.id');
+		$this->db->join('obat', 'rekammedis.id_obat = obat.id');
+		$this->db->where('pasien.no_pasien', $no_pasien);
+		$this->db->where('users.jabatan', 'Dokter');
+		$this->db->where('rekammedis.hapus', '0');
+		$query = $this->db->get();
+    return !empty($query)?$query->row_array():false;
+	}
 	public function no_pasien()
 	{
 		$this->db->order_by('id', 'DESC');
@@ -77,6 +102,13 @@ class Mdata extends CI_Model {
 	public function per_pasien($id)
 	{
 		$this->db->where('no_pasien', $id);
+		$this->db->where('hapus', '0');
+		$query = $this->db->get('pasien');
+    return !empty($query)?$query->row_array():false;
+	}
+	public function per_nama_pasien($nama)
+	{
+		$this->db->like('nama', $nama);
 		$this->db->where('hapus', '0');
 		$query = $this->db->get('pasien');
     return !empty($query)?$query->row_array():false;
@@ -129,16 +161,6 @@ class Mdata extends CI_Model {
 		$query = $this->db->get();
     return ($query->num_rows() > 0)?true:false;
 	}
-	public function count_checkup($no_pasien)
-	{
-		$this->db->select('checkup.id, pasien.no_pasien');
-		$this->db->from('checkup');
-		$this->db->join('pasien', 'checkup.id_pasien = pasien.id');
-		$this->db->where('pasien.no_pasien', $no_pasien);
-		$this->db->where('checkup.hapus', '0');
-		$query = $this->db->get();
-    return ($query->num_rows() > 0)?true:false;
-	}
 	public function count_data($table)
 	{
 		$this->db->where('hapus', '0');
@@ -173,54 +195,163 @@ class Mdata extends CI_Model {
 		$query = $this->db->get('pasien');
     return !empty($query)?$query->result_array():false;
 	}
-	public function checkup_per_pasien($ktp)
+	public function perktp_pasien($ktp)
+	{
+		$this->db->where('ktp', $ktp);
+		$this->db->where('hapus', '0');
+		$query = $this->db->get('pasien');
+    return !empty($query)?$query->row_array():false;
+	}
+	public function medical_checkup($table, $no_pasien, $id)
 	{
 		$this->db->select('*');
-		$this->db->from('checkup');
-		$this->db->join('pasien', 'checkup.id_pasien = pasien.id');
-		$this->db->where('pasien.ktp', $ktp);
-		$this->db->where('checkup.hapus', '0');
+		$this->db->from($table);
+		$this->db->join('pasien', $table.'.id_pasien = pasien.id');
+		$this->db->where('pasien.no_pasien', $no_pasien);
+		$this->db->where($table.'.id', $id);
+		$this->db->where($table.'.hapus', '0');
+		$this->db->order_by($table.'.id', 'ASC');
 		$query = $this->db->get();
-    return !empty($query)?$query->row_array():false;
+    return !empty($query)?$query->result_array():false;
 	}
 	public function rontgen()
 	{
-		$this->db->select('*');
-		$this->db->from('checkup');
-		$this->db->join('pasien', 'checkup.id_pasien = pasien.id');
-		$this->db->where('rontgen', '1');
-		$this->db->where('checkup.hapus', '0');
+		$this->db->select('rontgen.id as id_rontgen, no_pasien, nama, goldarah, gender, tanggal, status');
+		$this->db->from('rontgen');
+		$this->db->join('pasien', 'rontgen.id_pasien = pasien.id');
+		$this->db->where('rontgen.hapus', '0');
+		$this->db->order_by('rontgen.id', 'ASC');
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
+	}
+	public function per_rontgen($no_pasien, $id)
+	{
+		$this->db->select('*');
+		$this->db->from('rontgen');
+		$this->db->join('pasien', 'rontgen.id_pasien = pasien.id');
+		$this->db->where('rontgen.id', $id);
+		$this->db->where('pasien.no_pasien', $no_pasien);
+		$this->db->where('rontgen.hapus', '0');
+		$this->db->order_by('rontgen.tanggal', 'DESC');
+		$this->db->limit('1');
+		$query = $this->db->get();
+    return !empty($query)?$query->row_array():false;
+	}
+	public function rontgen_perktp($ktp)
+	{
+		$this->db->select('*');
+		$this->db->from('rontgen');
+		$this->db->join('pasien', 'rontgen.id_pasien = pasien.id');
+		$this->db->where('pasien.ktp', $ktp);
+		$this->db->where('rontgen.hapus', '0');
+		$this->db->order_by('rontgen.tanggal', 'DESC');
+		$this->db->limit('1');
+		$query = $this->db->get();
+    return !empty($query)?$query->row_array():false;
 	}
 	public function spirometri()
 	{
-		$this->db->select('*');
-		$this->db->from('checkup');
-		$this->db->join('pasien', 'checkup.id_pasien = pasien.id');
-		$this->db->where('spirometri', '1');
-		$this->db->where('checkup.hapus', '0');
+		$this->db->select('spirometri.id as id_spirometri, no_pasien, nama, goldarah, gender, tanggal, status');
+		$this->db->from('spirometri');
+		$this->db->join('pasien', 'spirometri.id_pasien = pasien.id');
+		$this->db->where('spirometri.hapus', '0');
+		$this->db->order_by('spirometri.id', 'ASC');
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
+	}
+	public function per_spirometri($no_pasien, $id)
+	{
+		$this->db->select('*');
+		$this->db->from('spirometri');
+		$this->db->join('pasien', 'spirometri.id_pasien = pasien.id');
+		$this->db->where('spirometri.id', $id);
+		$this->db->where('pasien.no_pasien', $no_pasien);
+		$this->db->where('spirometri.hapus', '0');
+		$this->db->order_by('spirometri.tanggal', 'DESC');
+		$this->db->limit('1');
+		$query = $this->db->get();
+    return !empty($query)?$query->row_array():false;
+	}
+	public function spirometri_perktp($ktp)
+	{
+		$this->db->select('*');
+		$this->db->from('spirometri');
+		$this->db->join('pasien', 'spirometri.id_pasien = pasien.id');
+		$this->db->where('pasien.ktp', $ktp);
+		$this->db->where('spirometri.hapus', '0');
+		$this->db->order_by('spirometri.tanggal', 'DESC');
+		$this->db->limit('1');
+		$query = $this->db->get();
+    return !empty($query)?$query->row_array():false;
 	}
 	public function audiometri()
 	{
-		$this->db->select('*');
-		$this->db->from('checkup');
-		$this->db->join('pasien', 'checkup.id_pasien = pasien.id');
-		$this->db->where('audiometri', '1');
-		$this->db->where('checkup.hapus', '0');
+		$this->db->select('audiometri.id as id_audiometri, no_pasien, nama, goldarah, gender, tanggal, status');
+		$this->db->from('audiometri');
+		$this->db->join('pasien', 'audiometri.id_pasien = pasien.id');
+		$this->db->where('audiometri.hapus', '0');
+		$this->db->order_by('audiometri.id', 'ASC');
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
 	}
-	public function ekg()
+	public function per_audiometri($no_pasien, $id)
 	{
 		$this->db->select('*');
-		$this->db->from('checkup');
-		$this->db->join('pasien', 'checkup.id_pasien = pasien.id');
-		$this->db->where('ekg', '1');
-		$this->db->where('checkup.hapus', '0');
+		$this->db->from('audiometri');
+		$this->db->join('pasien', 'audiometri.id_pasien = pasien.id');
+		$this->db->where('audiometri.id', $id);
+		$this->db->where('pasien.no_pasien', $no_pasien);
+		$this->db->where('audiometri.hapus', '0');
+		$this->db->order_by('audiometri.tanggal', 'DESC');
+		$this->db->limit('1');
+		$query = $this->db->get();
+    return !empty($query)?$query->row_array():false;
+	}
+	public function audiometri_perktp($ktp)
+	{
+		$this->db->select('*');
+		$this->db->from('audiometri');
+		$this->db->join('pasien', 'audiometri.id_pasien = pasien.id');
+		$this->db->where('pasien.ktp', $ktp);
+		$this->db->where('audiometri.hapus', '0');
+		$this->db->order_by('audiometri.tanggal', 'DESC');
+		$this->db->limit('1');
+		$query = $this->db->get();
+    return !empty($query)?$query->row_array():false;
+	}
+	public function ekg()
+	{
+		$this->db->select('ekg.id as id_ekg, no_pasien, nama, goldarah, gender, tanggal, status');
+		$this->db->from('ekg');
+		$this->db->join('pasien', 'ekg.id_pasien = pasien.id');
+		$this->db->where('ekg.hapus', '0');
+		$this->db->order_by('ekg.id', 'ASC');
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
+	}
+	public function per_ekg($no_pasien, $id)
+	{
+		$this->db->select('*');
+		$this->db->from('ekg');
+		$this->db->join('pasien', 'ekg.id_pasien = pasien.id');
+		$this->db->where('ekg.id', $id);
+		$this->db->where('pasien.no_pasien', $no_pasien);
+		$this->db->where('ekg.hapus', '0');
+		$this->db->order_by('ekg.tanggal', 'DESC');
+		$this->db->limit('1');
+		$query = $this->db->get();
+    return !empty($query)?$query->row_array():false;
+	}
+	public function ekg_perktp($ktp)
+	{
+		$this->db->select('*');
+		$this->db->from('ekg');
+		$this->db->join('pasien', 'ekg.id_pasien = pasien.id');
+		$this->db->where('pasien.ktp', $ktp);
+		$this->db->where('ekg.hapus', '0');
+		$this->db->order_by('ekg.tanggal', 'DESC');
+		$this->db->limit('1');
+		$query = $this->db->get();
+    return !empty($query)?$query->row_array():false;
 	}
 }
