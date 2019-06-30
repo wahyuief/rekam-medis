@@ -224,6 +224,18 @@ class Mdata extends CI_Model {
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
 	}
+	public function rontgen_all($ktp)
+	{
+		$this->db->select('rontgen.id as id_rontgen, ktp, no_pasien, nama, tanggal, status');
+		$this->db->from('rontgen');
+		$this->db->join('pasien', 'rontgen.id_pasien = pasien.id');
+		$this->db->where('pasien.ktp', $ktp);
+		$this->db->where('rontgen.hapus', '0');
+		$this->db->where('rontgen.status', 'Selesai');
+		$this->db->order_by('rontgen.tanggal', 'DESC');
+		$query = $this->db->get();
+    return !empty($query)?$query->result_array():false;
+	}
 	public function per_rontgen($no_pasien, $id)
 	{
 		$this->db->select('*');
@@ -256,6 +268,18 @@ class Mdata extends CI_Model {
 		$this->db->join('pasien', 'spirometri.id_pasien = pasien.id');
 		$this->db->where('spirometri.hapus', '0');
 		$this->db->order_by('spirometri.id', 'ASC');
+		$query = $this->db->get();
+    return !empty($query)?$query->result_array():false;
+	}
+	public function spirometri_all($ktp)
+	{
+		$this->db->select('spirometri.id as id_spirometri, ktp, no_pasien, nama, tanggal, status');
+		$this->db->from('spirometri');
+		$this->db->join('pasien', 'spirometri.id_pasien = pasien.id');
+		$this->db->where('pasien.ktp', $ktp);
+		$this->db->where('spirometri.hapus', '0');
+		$this->db->where('spirometri.status', 'Selesai');
+		$this->db->order_by('spirometri.tanggal', 'DESC');
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
 	}
@@ -294,6 +318,18 @@ class Mdata extends CI_Model {
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
 	}
+	public function audiometri_all($ktp)
+	{
+		$this->db->select('audiometri.id as id_audiometri, ktp, no_pasien, nama, tanggal, status');
+		$this->db->from('audiometri');
+		$this->db->join('pasien', 'audiometri.id_pasien = pasien.id');
+		$this->db->where('pasien.ktp', $ktp);
+		$this->db->where('audiometri.hapus', '0');
+		$this->db->where('audiometri.status', 'Selesai');
+		$this->db->order_by('audiometri.tanggal', 'DESC');
+		$query = $this->db->get();
+    return !empty($query)?$query->result_array():false;
+	}
 	public function per_audiometri($no_pasien, $id)
 	{
 		$this->db->select('*');
@@ -326,6 +362,18 @@ class Mdata extends CI_Model {
 		$this->db->join('pasien', 'ekg.id_pasien = pasien.id');
 		$this->db->where('ekg.hapus', '0');
 		$this->db->order_by('ekg.id', 'ASC');
+		$query = $this->db->get();
+    return !empty($query)?$query->result_array():false;
+	}
+	public function ekg_all($ktp)
+	{
+		$this->db->select('ekg.id as id_ekg, ktp, no_pasien, nama, tanggal, status');
+		$this->db->from('ekg');
+		$this->db->join('pasien', 'ekg.id_pasien = pasien.id');
+		$this->db->where('pasien.ktp', $ktp);
+		$this->db->where('ekg.hapus', '0');
+		$this->db->where('ekg.status', 'Selesai');
+		$this->db->order_by('ekg.tanggal', 'DESC');
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
 	}

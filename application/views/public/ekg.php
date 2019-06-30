@@ -16,7 +16,7 @@
     <div class="col-xl-8 col-lg-9 col-md-6">
       <div class="card shadow-sm mt-5">
         <div class="card-body">
-          <form method="post" class="user">
+          <form action="<?= base_url('report') ?>" method="post" class="user">
             <div class="input-group">
               <input type="text" name="ktp" class="form-control" placeholder="Nomor KTP">
               <div class="input-group-append">
@@ -27,22 +27,18 @@
           <div class="table-responsive mt-4">
             <table class="table table-bordered table-striped text-center">
               <tr>
+                <th width="50">No</th>
                 <th>Nama</th>
-                <th width="100">Rontgen</th>
-                <th width="100">Spirometri</th>
-                <th width="100">Audiotmetri</th>
-                <th width="100">Ekg</th>
+                <th>Tanggal Checkup</th>
+                <th>Print</th>
               </tr>
-              <?php if ($pasien && isset($rontgen) || isset($spirometri) || isset($audiometri) || isset($ekg)) {
-                echo '<tr>
-                  <td>'.$pasien['nama'].'</td>
-                  <td>'.($rontgen['status'] == 'Selesai' ? '<a href="rontgen/list/'.$pasien['ktp'].'">'.$rontgen['status'].'</a>' : 'Pending').'</td>
-                  <td>'.($spirometri['status'] == 'Selesai' ? '<a href="spirometri/list/'.$pasien['ktp'].'">'.$spirometri['status'].'</a>' : 'Pending').'</td>
-                  <td>'.($audiometri['status'] == 'Selesai' ? '<a href="audiometri/list/'.$pasien['ktp'].'">'.$audiometri['status'].'</a>' : 'Pending').'</td>
-                  <td>'.($ekg['status'] == 'Selesai' ? '<a href="ekg/list/'.$pasien['ktp'].'">'.$ekg['status'].'</a>' : 'Pending').'</td>
-                </tr>';
-              } else {
-                echo '<tr><td colspan="5">Data Pasien Tidak Ditemukan</td></tr>';
+              <?php $no=1;foreach($data as $row) {
+                  echo '<tr>
+                  <td>'.$no++.'</td>
+                  <td>'.$row['nama'].'</td>
+                  <td>'.$row['tanggal'].'</td>
+                  <td><a href="'.base_url('ekg/print/'.$row['no_pasien'].'/'.$row['id_ekg']).'"><i class="fa fa-print"></i></a></td>
+                  </tr>';
               } ?>
             </table>
           </div>
