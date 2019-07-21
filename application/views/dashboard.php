@@ -74,6 +74,68 @@
               </div>
             </div>
           </div>
+
+
+          <canvas id="myChart"></canvas>
+
+          <script>
+          var color = Chart.helpers.color;
+          var MONTHS = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+          ];
+          var ctx = document.getElementById('myChart').getContext('2d');
+          ctx.canvas.width = 1000;
+		      ctx.canvas.height = 300;
+          var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: MONTHS,
+                  datasets: [{
+                      type: 'line',
+                      backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+					            borderColor: window.chartColors.red,
+                      label: 'Jumlah Kunjungan Pasien',
+                      data: [
+                        <?=$this->mdata->pasien_perbulan(1)?>,
+                        <?=$this->mdata->pasien_perbulan(2)?>,
+                        <?=$this->mdata->pasien_perbulan(3)?>,
+                        <?=$this->mdata->pasien_perbulan(4)?>,
+                        <?=$this->mdata->pasien_perbulan(5)?>,
+                        <?=$this->mdata->pasien_perbulan(6)?>,
+                        <?=$this->mdata->pasien_perbulan(7)?>,
+                        <?=$this->mdata->pasien_perbulan(8)?>,
+                        <?=$this->mdata->pasien_perbulan(9)?>,
+                        <?=$this->mdata->pasien_perbulan(10)?>,
+                        <?=$this->mdata->pasien_perbulan(11)?>,
+                        <?=$this->mdata->pasien_perbulan(12)?>],
+                      borderWidth: 2,
+                      pointRadius: 5,
+                      fill: false,
+                      lineTension: 0,
+                  }]
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero: true
+                          }
+                      }]
+                  }
+              }
+          });
+          </script>
         </div>
       </div>
     </div>

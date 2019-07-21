@@ -112,6 +112,9 @@
                       <input type="date" name="tgl_daftar" value="<?php echo $data['tgl_daftar']; ?>" class="form-control">
                       <small class="text-danger"><?php echo form_error('tgl_daftar'); ?></small>
                     </div>
+                    <!-- <div class="form-group">
+                      <input type="file" name="picture" class="form-control">
+                    </div> -->
                     <div class="form-group">
                       <div class="btn-group d-flex" role="group" aria-label="Basic example">
                         <input type="submit" name="submit" value="Simpan" class="form-control btn btn-primary">

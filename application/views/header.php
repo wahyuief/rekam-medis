@@ -11,5 +11,9 @@
 <link href="<?php echo base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
 <link href="<?php echo base_url('assets/') ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="<?php echo base_url('assets/') ?>css/select2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="<?php echo base_url('assets/') ?>js/chart-utils.js"></script>
 </head>
 <body>

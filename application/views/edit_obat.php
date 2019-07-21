@@ -41,7 +41,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Stok</label>
-                      <input type="number" name="stok" value="<?php echo $data['stok']; ?>" class="form-control">
+                      <input type="number" name="stok" value="<?php echo ($data['stok']-$this->mdata->penggunaan_obat($data['id'])); ?>" class="form-control">
                       <small class="text-danger"><?php echo form_error('stok'); ?></small>
                     </div>
                     <div class="form-group">

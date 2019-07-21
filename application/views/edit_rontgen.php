@@ -24,7 +24,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label>Nama</label>
-                          <input type="text" name="nama" value="<?php echo $data['nama']; ?>" class="form-control" readonly>
+                          <input type="text" name="nama" value="<?php echo $data['nama_pasien']; ?>" class="form-control" readonly>
                           <small class="text-danger"><?php echo form_error('nama'); ?></small>
                         </div>
                       </div>

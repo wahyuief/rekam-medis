@@ -32,14 +32,14 @@
                 <th>Tanggal Checkup</th>
                 <th>Print</th>
               </tr>
-              <?php $no=1;foreach($data as $row) {
+              <?php if($data) { $no=1;foreach($data as $row) {
                   echo '<tr>
                   <td>'.$no++.'</td>
                   <td>'.$row['nama'].'</td>
                   <td>'.$row['tanggal'].'</td>
                   <td><a href="'.base_url('audiometri/print/'.$row['no_pasien'].'/'.$row['id_audiometri']).'"><i class="fa fa-print"></i></a></td>
                   </tr>';
-              } ?>
+              } } else { echo '<tr><td colspan="5">Data USG Tidak Ditemukan</td></tr>'; } ?>
             </table>
           </div>
         </div>

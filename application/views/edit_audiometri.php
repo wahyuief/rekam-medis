@@ -24,43 +24,53 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label>Nama</label>
-                          <input type="text" name="nama" value="<?php echo $data['nama']; ?>" class="form-control" readonly>
+                          <input type="text" name="nama" value="<?php echo $data['nama_pasien']; ?>" class="form-control" readonly>
                           <small class="text-danger"><?php echo form_error('nama'); ?></small>
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="form-group">
-                      <label>Irama</label>
-                      <input type="text" name="irama" value="<?php echo $data['irama']; ?>" class="form-control">
-                      <small class="text-danger"><?php echo form_error('irama'); ?></small>
+                    <div class="form-group">
+                      <label>Hepar</label>
+                      <textarea name="hepar" rows="3" class="form-control"><?php echo $data['hepar']; ?></textarea>
+                      <small class="text-danger"><?php echo form_error('hepar'); ?></small>
                     </div>
                     <div class="form-group">
-                      <label>Rate</label>
-                      <input type="text" name="rate" value="<?php echo $data['rate']; ?>" class="form-control">
-                      <small class="text-danger"><?php echo form_error('rate'); ?></small>
+                      <label>Empedu</label>
+                      <textarea name="empedu" rows="3" class="form-control"><?php echo $data['empedu']; ?></textarea>
+                      <small class="text-danger"><?php echo form_error('empedu'); ?></small>
                     </div>
                     <div class="form-group">
-                      <label>Axis</label>
-                      <input type="text" name="axis" value="<?php echo $data['axis']; ?>" class="form-control">
-                      <small class="text-danger"><?php echo form_error('axis'); ?></small>
+                      <label>Pankreas</label>
+                      <textarea name="pankreas" rows="3" class="form-control"><?php echo $data['pankreas']; ?></textarea>
+                      <small class="text-danger"><?php echo form_error('pankreas'); ?></small>
                     </div>
                     <div class="form-group">
-                      <label>Kelainan</label>
-                      <input type="text" name="kelainan" value="<?php echo $data['kelainan']; ?>" class="form-control">
-                      <small class="text-danger"><?php echo form_error('kelainan'); ?></small>
-                    </div> -->
+                      <label>Lien</label>
+                      <textarea name="lien" rows="3" class="form-control"><?php echo $data['lien']; ?></textarea>
+                      <small class="text-danger"><?php echo form_error('lien'); ?></small>
+                    </div>
+                    <div class="form-group">
+                      <label>Ginjal</label>
+                      <textarea name="ginjal" rows="3" class="form-control"><?php echo $data['ginjal']; ?></textarea>
+                      <small class="text-danger"><?php echo form_error('ginjal'); ?></small>
+                    </div>
+                    <div class="form-group">
+                      <label>Buli-Buli</label>
+                      <textarea name="bulibuli" rows="3" class="form-control"><?php echo $data['bulibuli']; ?></textarea>
+                      <small class="text-danger"><?php echo form_error('bulibuli'); ?></small>
+                    </div>
+                    <div class="form-group">
+                      <label>Prostat</label>
+                      <textarea name="prostat" rows="3" class="form-control"><?php echo $data['prostat']; ?></textarea>
+                      <small class="text-danger"><?php echo form_error('prostat'); ?></small>
+                    </div>
                   </div>
                   <div class="col-md-4">
-                    <!-- <div class="form-group">
-                      <label>Kesimpulan</label>
-                      <input type="text" name="kesimpulan" value="<?php echo $data['kesimpulan']; ?>" class="form-control">
-                      <small class="text-danger"><?php echo form_error('kesimpulan'); ?></small>
-                    </div>
                     <div class="form-group">
-                      <label>Saran</label>
-                      <input type="text" name="saran" value="<?php echo $data['saran']; ?>" class="form-control">
-                      <small class="text-danger"><?php echo form_error('saran'); ?></small>
-                    </div> -->
+                      <label>Kesan</label>
+                      <input type="text" name="kesan" value="<?php echo $data['kesan']; ?>" class="form-control">
+                      <small class="text-danger"><?php echo form_error('kesan'); ?></small>
+                    </div>
                     <div class="form-group">
                       <label>Keterangan</label>
                       <textarea name="keterangan" rows="3" class="form-control"><?php echo $data['keterangan']; ?></textarea>

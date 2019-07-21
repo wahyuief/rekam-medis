@@ -30,7 +30,7 @@
                         <td>'.$i++.'</td>
                         <td>'.$row['nama'].'</td>
                         <td>'.$row['jenis'].'</td>
-                        <td>'.$row['stok'].'</td>
+                        <td>'.($row['stok']-$this->mdata->penggunaan_obat($row['id'])).'</td>
                         <td>'.$row['satuan'].'</td>
                         <td>'.$row['keterangan'].'</td>
                         <td>'.$row['tgl_masuk'].'</td>

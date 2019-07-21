@@ -296,17 +296,19 @@ class Edit extends CI_Controller {
 			redirect(base_url('data/audiometri'));
 		}
 		$pasien = $this->mdata->per_pasien($no_pasien);
-		$this->form_validation->set_rules('irama', 'irama', 'trim|required', array('required' => 'Irama Wajib Diisi'));
-		$this->form_validation->set_rules('rate', 'rate', 'trim|required', array('required' => 'Rate Wajib Diisi'));
-		$this->form_validation->set_rules('axis', 'axis', 'trim|required', array('required' => 'Axis Wajib Diisi'));
-		$this->form_validation->set_rules('kelainan', 'kelainan', 'trim|required', array('required' => 'Kelainan Wajib Diisi'));
-		$this->form_validation->set_rules('kesimpulan', 'kesimpulan', 'trim|required', array('required' => 'Kesimpulan Wajib Diisi'));
-		$this->form_validation->set_rules('saran', 'saran', 'trim|required', array('required' => 'Saran Wajib Diisi'));
+		$this->form_validation->set_rules('hepar', 'hepar', 'trim|required', array('required' => 'Irama Wajib Diisi'));
+		$this->form_validation->set_rules('empedu', 'empedu', 'trim|required', array('required' => 'Empedu Wajib Diisi'));
+		$this->form_validation->set_rules('pankreas', 'pankreas', 'trim|required', array('required' => 'Pankreas Wajib Diisi'));
+		$this->form_validation->set_rules('lien', 'lien', 'trim|required', array('required' => 'Lien Wajib Diisi'));
+		$this->form_validation->set_rules('ginjal', 'ginjal', 'trim|required', array('required' => 'Ginjal Wajib Diisi'));
+		$this->form_validation->set_rules('bulibuli', 'bulibuli', 'trim|required', array('required' => 'Buli-buli Wajib Diisi'));
+		$this->form_validation->set_rules('prostat', 'prostat', 'trim|required', array('required' => 'Prostat Wajib Diisi'));
+		$this->form_validation->set_rules('kesan', 'kesan', 'trim|required', array('required' => 'Saran Wajib Diisi'));
 		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required', array('required' => 'Keterangan Wajib Diisi'));
 		if ($this->form_validation->run() === FALSE) {
 			$data = array(
 				'page' => 'edit_audiometri',
-				'title' => 'Data Audiometri',
+				'title' => 'Data USG',
 				'data' => $this->mdata->per_audiometri($no_pasien, $id),
 				'pasien' => $pasien,
 				'dokter' => $this->mdata->dokter()
@@ -314,12 +316,14 @@ class Edit extends CI_Controller {
 			$this->load->view('layout_dashboard', $data);
 		} else {
 			$input = array(
-				'irama' => $this->input->post('irama'),
-				'rate' => $this->input->post('rate'),
-				'axis' => $this->input->post('axis'),
-				'kelainan' => $this->input->post('kelainan'),
-				'kesimpulan' => $this->input->post('kesimpulan'),
-				'saran' => $this->input->post('saran'),
+				'hepar' => $this->input->post('hepar'),
+				'empedu' => $this->input->post('empedu'),
+				'pankreas' => $this->input->post('pankreas'),
+				'lien' => $this->input->post('lien'),
+				'ginjal' => $this->input->post('ginjal'),
+				'bulibuli' => $this->input->post('bulibuli'),
+				'prostat' => $this->input->post('prostat'),
+				'kesan' => $this->input->post('kesan'),
 				'keterangan' => $this->input->post('keterangan'),
 				'status' => $this->input->post('status'),
 				'id_dokter' => $this->input->post('dokter')

@@ -30,16 +30,16 @@
                 <th>Nama</th>
                 <th width="100">Rontgen</th>
                 <th width="100">Spirometri</th>
-                <th width="100">Audiotmetri</th>
+                <th width="100">USG</th>
                 <th width="100">Ekg</th>
               </tr>
               <?php if ($pasien && isset($rontgen) || isset($spirometri) || isset($audiometri) || isset($ekg)) {
                 echo '<tr>
                   <td>'.$pasien['nama'].'</td>
-                  <td>'.($rontgen['status'] == 'Selesai' ? '<a href="rontgen/list/'.$pasien['ktp'].'">'.$rontgen['status'].'</a>' : 'Pending').'</td>
-                  <td>'.($spirometri['status'] == 'Selesai' ? '<a href="spirometri/list/'.$pasien['ktp'].'">'.$spirometri['status'].'</a>' : 'Pending').'</td>
-                  <td>'.($audiometri['status'] == 'Selesai' ? '<a href="audiometri/list/'.$pasien['ktp'].'">'.$audiometri['status'].'</a>' : 'Pending').'</td>
-                  <td>'.($ekg['status'] == 'Selesai' ? '<a href="ekg/list/'.$pasien['ktp'].'">'.$ekg['status'].'</a>' : 'Pending').'</td>
+                  <td><a href="rontgen/list/'.$pasien['ktp'].'">Lihat</a></td>
+                  <td><a href="spirometri/list/'.$pasien['ktp'].'">Lihat</a></td>
+                  <td><a href="audiometri/list/'.$pasien['ktp'].'">Lihat</a></td>
+                  <td><a href="ekg/list/'.$pasien['ktp'].'">Lihat</a></td>
                 </tr>';
               } else {
                 echo '<tr><td colspan="5">Data Pasien Tidak Ditemukan</td></tr>';

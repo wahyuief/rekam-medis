@@ -28,11 +28,25 @@ class Mdata extends CI_Model {
 		$query = $this->db->get('obat');
     return !empty($query)?$query->result_array():false;
 	}
+	public function penggunaan_obat($id)
+	{
+		$this->db->where('id_obat', $id);
+		$this->db->where('hapus', '0');
+		$query = $this->db->get('rekammedis');
+    	return !empty($query)?$query->num_rows():'0';
+	}
 	public function pasien()
 	{
 		$this->db->where('hapus', '0');
 		$query = $this->db->get('pasien');
     return !empty($query)?$query->result_array():false;
+	}
+	public function pasien_perbulan($bulan)
+	{
+		$this->db->where('MONTH(created_at)', $bulan);
+		$this->db->where('YEAR(created_at)', date('Y'));
+		$query = $this->db->get('pasien');
+    return !empty($query)?$query->num_rows():'0';
 	}
 	public function penanggung($no_pasien)
 	{
@@ -58,7 +72,7 @@ class Mdata extends CI_Model {
 	}
 	public function rekam_medis_per_pasien($no_pasien)
 	{
-		$this->db->select('rekammedis.id, no_pasien, pasien.nama as nama_pasien, users.nama as nama_dokter, keluhan, diagnosa, tindakan, rekammedis.tanggal as tgl_daftar, obat.nama as nama_obat');
+		$this->db->select('rekammedis.id, no_pasien, pasien.nama as nama_pasien, users.nama as nama_dokter, pasien.goldarah, tanggal_lahir, pasien.gender, pasien.alamat, keluhan, diagnosa, tindakan, rekammedis.tanggal as tgl_daftar, spesialis, obat.nama as nama_obat');
 		$this->db->from('rekammedis');
 		$this->db->join('pasien', 'rekammedis.id_pasien = pasien.id');
 		$this->db->join('users', 'rekammedis.id_dokter = users.id');
@@ -238,9 +252,10 @@ class Mdata extends CI_Model {
 	}
 	public function per_rontgen($no_pasien, $id)
 	{
-		$this->db->select('*');
+		$this->db->select('no_pasien, users.nama as nama_dokter, pasien.nama as nama_pasien, spesialis, DATE(rontgen.tanggal), tanggal_lahir, pasien.gender, pasien.alamat, jenis_periksa, rontgen.id as no_rontgen, keterangan, cor, pulmo, costae, sinus, diapragma, kesan');
 		$this->db->from('rontgen');
 		$this->db->join('pasien', 'rontgen.id_pasien = pasien.id');
+		$this->db->join('users', 'rontgen.id_dokter = users.id');
 		$this->db->where('rontgen.id', $id);
 		$this->db->where('pasien.no_pasien', $no_pasien);
 		$this->db->where('rontgen.hapus', '0');
@@ -285,9 +300,10 @@ class Mdata extends CI_Model {
 	}
 	public function per_spirometri($no_pasien, $id)
 	{
-		$this->db->select('*');
+		$this->db->select('no_pasien, users.nama as nama_dokter, pasien.nama as nama_pasien, spesialis, DATE(spirometri.tanggal), tanggal_lahir, pasien.gender, pasien.alamat, nilai_prediksi, spirometri.id as no_spirometri, keterangan, kvp, vep, ape, kesan');
 		$this->db->from('spirometri');
 		$this->db->join('pasien', 'spirometri.id_pasien = pasien.id');
+		$this->db->join('users', 'spirometri.id_dokter = users.id');
 		$this->db->where('spirometri.id', $id);
 		$this->db->where('pasien.no_pasien', $no_pasien);
 		$this->db->where('spirometri.hapus', '0');
@@ -332,9 +348,10 @@ class Mdata extends CI_Model {
 	}
 	public function per_audiometri($no_pasien, $id)
 	{
-		$this->db->select('*');
+		$this->db->select('no_pasien, users.nama as nama_dokter, pasien.nama as nama_pasien, spesialis, DATE(audiometri.tanggal), tanggal_lahir, pasien.gender, pasien.alamat, audiometri.id as no_audiometri, hepar, empedu, pankreas, lien, ginjal, bulibuli, prostat, kesan, keterangan');
 		$this->db->from('audiometri');
 		$this->db->join('pasien', 'audiometri.id_pasien = pasien.id');
+		$this->db->join('users', 'audiometri.id_dokter = users.id');
 		$this->db->where('audiometri.id', $id);
 		$this->db->where('pasien.no_pasien', $no_pasien);
 		$this->db->where('audiometri.hapus', '0');
@@ -379,9 +396,10 @@ class Mdata extends CI_Model {
 	}
 	public function per_ekg($no_pasien, $id)
 	{
-		$this->db->select('*');
+		$this->db->select('no_pasien, users.nama as nama_dokter, pasien.nama as nama_pasien, spesialis, DATE(ekg.tanggal), tanggal_lahir, pasien.gender, pasien.alamat, ekg.id as no_ekg, irama, axis, rate, kelainan, kesimpulan, keterangan, saran');
 		$this->db->from('ekg');
 		$this->db->join('pasien', 'ekg.id_pasien = pasien.id');
+		$this->db->join('users', 'ekg.id_dokter = users.id');
 		$this->db->where('ekg.id', $id);
 		$this->db->where('pasien.no_pasien', $no_pasien);
 		$this->db->where('ekg.hapus', '0');

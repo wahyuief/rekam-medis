@@ -9,6 +9,7 @@ class Data extends CI_Controller {
 		if (!$this->session->has_userdata('medhicallya')) {
 			redirect(base_url('masuk'));
 		}
+		$this->load->helper('umur');
   }
 	public function index()
 	{
@@ -72,7 +73,7 @@ class Data extends CI_Controller {
 	{
 		$data = array(
 			'page' => 'audiometri',
-			'title' => 'Audiometri',
+			'title' => 'USG',
 			'data' => $this->mdata->audiometri()
 		);
 		$this->load->view('layout_dashboard', $data);
