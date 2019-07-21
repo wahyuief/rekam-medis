@@ -60,75 +60,45 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h3 class="border text-center pd">Hasil Pemeriksaan EKG</h3>
+  <div class="container" style="border: 5px solid;padding: 5px">
+    <div style="text-align:center">
+      <b>Kartu Berobat</b><br>
+      <h3>MITRA HEALTH SERVICE</h3>
+      <small>Jl. Veteran No.2, Marga Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17141</small>
+    </div>
     <br><br>
-    <div class="float-right"><?= $ekg['DATE(ekg.tanggal)'] ?></div>
-    <br>
     <table>
       <tr>
-        <td>No EKG</td>
+        <td width="110">Nomor Pasien</td>
         <td>:</td>
-        <td><?= $ekg['no_ekg']; ?></td>
+        <td><?php echo $data['no_pasien'] ?></td>
       </tr>
       <tr>
-        <td>Nama Pasien</td>
+        <td>Nama</td>
         <td>:</td>
-        <td><?= $ekg['nama_pasien']; ?></td>
+        <td><?php echo $data['nama'] ?></td>
       </tr>
       <tr>
         <td>Umur</td>
         <td>:</td>
-        <td><?= hitung_umur($ekg['tanggal_lahir']); ?> Tahun</td>
-      </tr>
-      <tr>
-        <td>Jenis Kelamin</td>
-        <td>:</td>
-        <td><?= ($ekg['gender'] == 'L' ? 'Laki-laki' : 'Perempuan'); ?></td>
+        <td><?php echo hitung_umur($data['tanggal_lahir']) ?> Tahun</td>
       </tr>
       <tr>
         <td>Alamat</td>
         <td>:</td>
-        <td><?= $ekg['alamat']; ?></td>
-      </tr>
-  </table>
-  <br><br>
-  <hr>
-  <br><br>
-  <table class="inidia">
-      <tr>
-        <th width="300">Pemeriksaan</th>
-        <th width="100">Nilai</th>
+        <td><?php echo $data['alamat'] ?></td>
       </tr>
       <tr>
-        <td>Irama</td>
-        <td><?= $ekg['irama'] ?></td>
-      </tr>
-      <tr>
-        <td>Rate</td>
-        <td><?= $ekg['rate'] ?></td>
-      </tr>
-      <tr>
-        <td>Axis</td>
-        <td><?= $ekg['axis'] ?></td>
-      </tr>
-      <tr>
-        <td>Kelainan</td>
-        <td><?= $ekg['kelainan'] ?></td>
+        <td>Telp</td>
+        <td>:</td>
+        <td><?php echo $data['phone'] ?></td>
       </tr>
     </table>
     <br>
-    Kesimpulan : <?= $ekg['kesimpulan'] ?>
-    <br>
-    Keterangan : <?= $ekg['keterangan'] ?>
-    <br>
-    Saran : <?= $ekg['saran'] ?>
-    <br><br>
-    <div class="text-center float-right" style="margin-top:5em;">
-      <?= $ekg['nama_dokter']; ?><br>
-      <?= $ekg['spesialis']; ?>
+    <div style="border:1px solid;text-align:center">
+      <p>BAWALAH KARTU INI SETIAP KALI ANDA BEROBAT</p>
     </div>
   </div>
-  <?php //print_r($ekg); ?>
+  <?php //print_r($data); ?>
 </body>
 </html>

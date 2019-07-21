@@ -1,8 +1,9 @@
 <div class="container-fluid">
 
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <span>Dashboard > <?php echo $title ?></span>
-            <a href="<?php echo base_url('rekam/baru') ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;&nbsp;Input Keluhan</a>
+          <div class="d-sm-flex bd-highlight align-items-center mb-4">
+            <span class="flex-grow-1 bd-highlight">Dashboard > <?php echo $title ?></span>
+            <a href="<?php echo base_url('excel/rekam_medis') ?>" class="bd-highlight mr-2 btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <a href="<?php echo base_url('rekam/baru') ?>" class="bd-highlight btn btn-sm btn-success shadow-sm"><i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;&nbsp;Input Keluhan</a>
           </div>
 
           <div class="card shadow mb-4">

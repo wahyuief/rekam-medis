@@ -3,8 +3,15 @@
 <head>
   <title>Report Table</title>
   <style type="text/css">
+    @font-face {
+      font-family: 'Elegance';
+      font-weight: normal;
+      font-style: normal;
+      font-variant: normal;
+      src: url("http://eclecticgeek.com/dompdf/fonts/Elegance.ttf") format("truetype");
+    }
     html {
-      font-family: arial!important;
+      font-family: Elegance, sans-serif!important;
     }
     .container {
       margin: 0 3em;
