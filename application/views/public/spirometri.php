@@ -37,7 +37,7 @@
                   <td>'.$no++.'</td>
                   <td>'.$row['nama'].'</td>
                   <td>'.$row['tanggal'].'</td>
-                  <td><a href="'.base_url('spirometri/print/'.$row['no_pasien'].'/'.$row['id_spirometri']).'"><i class="fa fa-print"></i></a></td>
+                  <td><a href="'.base_url('spirometri/print_file/'.$row['no_pasien'].'/'.$row['id_spirometri']).'"><i class="fa fa-print"></i></a></td>
                   </tr>';
               } } else { echo '<tr><td colspan="5">Data Spirometri Tidak Ditemukan</td></tr>'; } ?>
             </table>

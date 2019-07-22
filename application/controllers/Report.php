@@ -55,7 +55,7 @@ class Report extends CI_Controller {
 		);
 		$this->load->view('report', $data);
 	}
-	public function print($table, $no_pasien, $id)
+	public function print_file($table, $no_pasien, $id)
 	{
 		$this->load->library('pdf');
 		$data['rekam_medis'] = $this->mdata->rekam_medis_per_pasien($id);

@@ -99,7 +99,7 @@ class Rekam extends CI_Controller {
 			}
 		}
 	}
-	public function print($id)
+	public function print_file($id)
 	{
 		$this->load->library('pdf');
 		$data['rekam_medis'] = $this->mdata->rekam_medis_per_pasien($id);

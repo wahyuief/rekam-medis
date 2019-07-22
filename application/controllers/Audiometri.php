@@ -17,7 +17,7 @@ class Audiometri extends CI_Controller {
 		);
 		$this->load->view('public/audiometri', $data);
 	}
-	public function print($nik, $id)
+	public function print_file($nik, $id)
 	{
 		$this->load->library('pdf');
 		$data['audiometri'] = $this->mdata->per_audiometri($nik, $id);

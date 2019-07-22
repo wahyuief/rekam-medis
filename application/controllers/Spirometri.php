@@ -17,7 +17,7 @@ class Spirometri extends CI_Controller {
 		);
 		$this->load->view('public/spirometri', $data);
 	}
-	public function print($nik, $id)
+	public function print_file($nik, $id)
 	{
 		$this->load->library('pdf');
 		$data['spirometri'] = $this->mdata->per_spirometri($nik, $id);

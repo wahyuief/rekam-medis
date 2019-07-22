@@ -17,7 +17,7 @@ class Ekg extends CI_Controller {
 		);
 		$this->load->view('public/ekg', $data);
 	}
-	public function print($nik, $id)
+	public function print_file($nik, $id)
 	{
 		$this->load->library('pdf');
 		$data['ekg'] = $this->mdata->per_ekg($nik, $id);

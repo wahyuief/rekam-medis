@@ -44,7 +44,7 @@
                             </button>
                             <div class="dropdown-menu">
                               <a class="dropdown-item" href="'.base_url('rekam/pasien/').$row['no_pasien'].'">Edit</a>
-                              <a class="dropdown-item" href="'.base_url('rekam/print/').$row['no_pasien'].'">Print</a>
+                              <a class="dropdown-item" href="'.base_url('rekam/print_file/').$row['no_pasien'].'">Print</a>
                             </div>
                           </div>
                       </tr>';

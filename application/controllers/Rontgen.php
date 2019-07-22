@@ -17,7 +17,7 @@ class Rontgen extends CI_Controller {
 		);
 		$this->load->view('public/rontgen', $data);
 	}
-	public function print($nik, $id)
+	public function print_file($nik, $id)
 	{
 		$this->load->library('pdf');
 		$data['rontgen'] = $this->mdata->per_rontgen($nik, $id);
