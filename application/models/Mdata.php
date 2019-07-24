@@ -324,50 +324,50 @@ class Mdata extends CI_Model {
 		$query = $this->db->get();
     return !empty($query)?$query->row_array():false;
 	}
-	public function audiometri()
+	public function usg()
 	{
-		$this->db->select('audiometri.id as id_audiometri, no_pasien, nama, goldarah, gender, tanggal, status');
-		$this->db->from('audiometri');
-		$this->db->join('pasien', 'audiometri.id_pasien = pasien.id');
-		$this->db->where('audiometri.hapus', '0');
-		$this->db->order_by('audiometri.id', 'ASC');
+		$this->db->select('usg.id as id_usg, no_pasien, nama, goldarah, gender, tanggal, status');
+		$this->db->from('usg');
+		$this->db->join('pasien', 'usg.id_pasien = pasien.id');
+		$this->db->where('usg.hapus', '0');
+		$this->db->order_by('usg.id', 'ASC');
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
 	}
-	public function audiometri_all($ktp)
+	public function usg_all($ktp)
 	{
-		$this->db->select('audiometri.id as id_audiometri, ktp, no_pasien, nama, tanggal, status');
-		$this->db->from('audiometri');
-		$this->db->join('pasien', 'audiometri.id_pasien = pasien.id');
+		$this->db->select('usg.id as id_usg, ktp, no_pasien, nama, tanggal, status');
+		$this->db->from('usg');
+		$this->db->join('pasien', 'usg.id_pasien = pasien.id');
 		$this->db->where('pasien.ktp', $ktp);
-		$this->db->where('audiometri.hapus', '0');
-		$this->db->where('audiometri.status', 'Selesai');
-		$this->db->order_by('audiometri.tanggal', 'DESC');
+		$this->db->where('usg.hapus', '0');
+		$this->db->where('usg.status', 'Selesai');
+		$this->db->order_by('usg.tanggal', 'DESC');
 		$query = $this->db->get();
     return !empty($query)?$query->result_array():false;
 	}
-	public function per_audiometri($no_pasien, $id)
+	public function per_usg($no_pasien, $id)
 	{
-		$this->db->select('no_pasien, users.nama as nama_dokter, pasien.nama as nama_pasien, spesialis, DATE(audiometri.tanggal), tanggal_lahir, pasien.gender, pasien.alamat, audiometri.id as no_audiometri, hepar, empedu, pankreas, lien, ginjal, bulibuli, prostat, kesan, keterangan');
-		$this->db->from('audiometri');
-		$this->db->join('pasien', 'audiometri.id_pasien = pasien.id');
-		$this->db->join('users', 'audiometri.id_dokter = users.id');
-		$this->db->where('audiometri.id', $id);
+		$this->db->select('no_pasien, users.nama as nama_dokter, pasien.nama as nama_pasien, spesialis, DATE(usg.tanggal), tanggal_lahir, pasien.gender, pasien.alamat, usg.id as no_usg, hepar, empedu, pankreas, lien, ginjal, bulibuli, prostat, kesan, keterangan');
+		$this->db->from('usg');
+		$this->db->join('pasien', 'usg.id_pasien = pasien.id');
+		$this->db->join('users', 'usg.id_dokter = users.id');
+		$this->db->where('usg.id', $id);
 		$this->db->where('pasien.no_pasien', $no_pasien);
-		$this->db->where('audiometri.hapus', '0');
-		$this->db->order_by('audiometri.tanggal', 'DESC');
+		$this->db->where('usg.hapus', '0');
+		$this->db->order_by('usg.tanggal', 'DESC');
 		$this->db->limit('1');
 		$query = $this->db->get();
     return !empty($query)?$query->row_array():false;
 	}
-	public function audiometri_perktp($ktp)
+	public function usg_perktp($ktp)
 	{
 		$this->db->select('*');
-		$this->db->from('audiometri');
-		$this->db->join('pasien', 'audiometri.id_pasien = pasien.id');
+		$this->db->from('usg');
+		$this->db->join('pasien', 'usg.id_pasien = pasien.id');
 		$this->db->where('pasien.ktp', $ktp);
-		$this->db->where('audiometri.hapus', '0');
-		$this->db->order_by('audiometri.tanggal', 'DESC');
+		$this->db->where('usg.hapus', '0');
+		$this->db->order_by('usg.tanggal', 'DESC');
 		$this->db->limit('1');
 		$query = $this->db->get();
     return !empty($query)?$query->row_array():false;

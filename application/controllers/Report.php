@@ -14,7 +14,7 @@ class Report extends CI_Controller {
 			'pasien' => $this->mdata->perktp_pasien($ktp),
 			'rontgen' => $this->mdata->rontgen_perktp($ktp),
 			'spirometri' => $this->mdata->spirometri_perktp($ktp),
-			'audiometri' => $this->mdata->audiometri_perktp($ktp),
+			'usg' => $this->mdata->usg_perktp($ktp),
 			'ekg' => $this->mdata->ekg_perktp($ktp)
 		);
 		$this->load->view('report', $data);
@@ -37,12 +37,12 @@ class Report extends CI_Controller {
 		);
 		$this->load->view('report_checkup', $data);
 	}
-	public function audiometri()
+	public function usg()
 	{
 		$ktp = $this->input->post('ktp');
 		$data = array(
 			'pasien' => $this->mdata->perktp_pasien($ktp),
-			'audiometri' => $this->mdata->audiometri_perktp($ktp)
+			'usg' => $this->mdata->usg_perktp($ktp)
 		);
 		$this->load->view('report', $data);
 	}

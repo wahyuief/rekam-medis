@@ -291,9 +291,9 @@ class Edit extends CI_Controller {
 			}
 		}
 	}
-	public function audiometri($no_pasien, $id) {
-		if (!$this->mdata->per_audiometri($no_pasien, $id)) {
-			redirect(base_url('data/audiometri'));
+	public function usg($no_pasien, $id) {
+		if (!$this->mdata->per_usg($no_pasien, $id)) {
+			redirect(base_url('data/usg'));
 		}
 		$pasien = $this->mdata->per_pasien($no_pasien);
 		$this->form_validation->set_rules('hepar', 'hepar', 'trim|required', array('required' => 'Irama Wajib Diisi'));
@@ -307,9 +307,9 @@ class Edit extends CI_Controller {
 		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required', array('required' => 'Keterangan Wajib Diisi'));
 		if ($this->form_validation->run() === FALSE) {
 			$data = array(
-				'page' => 'edit_audiometri',
+				'page' => 'edit_usg',
 				'title' => 'Data USG',
-				'data' => $this->mdata->per_audiometri($no_pasien, $id),
+				'data' => $this->mdata->per_usg($no_pasien, $id),
 				'pasien' => $pasien,
 				'dokter' => $this->mdata->dokter()
 			);
@@ -328,8 +328,8 @@ class Edit extends CI_Controller {
 				'status' => $this->input->post('status'),
 				'id_dokter' => $this->input->post('dokter')
 			);
-			if ($this->mupdate->audiometri($input, $id) === true) {
-				redirect(base_url('edit/audiometri/').$no_pasien.'/'.$id);
+			if ($this->mupdate->usg($input, $id) === true) {
+				redirect(base_url('edit/usg/').$no_pasien.'/'.$id);
 			}
 		}
 	}

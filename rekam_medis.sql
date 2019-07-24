@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 21, 2019 at 03:09 PM
+-- Generation Time: Jul 24, 2019 at 03:56 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -21,37 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `rekam_medis`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `audiometri`
---
-
-CREATE TABLE `audiometri` (
-  `id` int(11) NOT NULL,
-  `id_pasien` int(11) NOT NULL,
-  `id_dokter` int(11) NOT NULL,
-  `hepar` text NOT NULL,
-  `empedu` text NOT NULL,
-  `pankreas` text NOT NULL,
-  `lien` text NOT NULL,
-  `ginjal` text NOT NULL,
-  `bulibuli` text NOT NULL,
-  `prostat` text NOT NULL,
-  `kesan` text NOT NULL,
-  `keterangan` varchar(255) NOT NULL,
-  `status` varchar(16) NOT NULL,
-  `hapus` tinyint(1) NOT NULL,
-  `tanggal` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `audiometri`
---
-
-INSERT INTO `audiometri` (`id`, `id_pasien`, `id_dokter`, `hepar`, `empedu`, `pankreas`, `lien`, `ginjal`, `bulibuli`, `prostat`, `kesan`, `keterangan`, `status`, `hapus`, `tanggal`) VALUES
-(1, 3, 2, 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'Selesai', 0, '2019-07-21 19:59:57');
 
 -- --------------------------------------------------------
 
@@ -280,17 +249,41 @@ INSERT INTO `users` (`id`, `nip`, `nama`, `alamat`, `jabatan`, `email`, `passwor
 (4, 31340, 'Diajeng Putri', 'Malang', 'Pegawai', 'putri@gmail.com', 'b9f08a0a16e7ed30ab463acaf6f15c46f9c5ff21', NULL, 'P', '081244359031', NULL, 0, '2019-04-06 17:35:11', '2019-04-11 20:07:56'),
 (5, 31341, 'Dr. Riana Dewi', 'Bandung', 'Dokter', 'riana@gmail.com', 'bf67983bf7400cac1a51913d276301b38581f309', 'Kulit', 'P', '08522138921', NULL, 0, '2019-04-06 17:41:17', '2019-04-06 17:41:17');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usg`
+--
+
+CREATE TABLE `usg` (
+  `id` int(11) NOT NULL,
+  `id_pasien` int(11) NOT NULL,
+  `id_dokter` int(11) NOT NULL,
+  `hepar` text NOT NULL,
+  `empedu` text NOT NULL,
+  `pankreas` text NOT NULL,
+  `lien` text NOT NULL,
+  `ginjal` text NOT NULL,
+  `bulibuli` text NOT NULL,
+  `prostat` text NOT NULL,
+  `kesan` text NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `status` varchar(16) NOT NULL,
+  `hapus` tinyint(1) NOT NULL,
+  `tanggal` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `usg`
+--
+
+INSERT INTO `usg` (`id`, `id_pasien`, `id_dokter`, `hepar`, `empedu`, `pankreas`, `lien`, `ginjal`, `bulibuli`, `prostat`, `kesan`, `keterangan`, `status`, `hapus`, `tanggal`) VALUES
+(1, 3, 2, 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'Selesai', 0, '2019-07-21 19:59:57'),
+(2, 4, 1, '', '', '', '', '', '', '', '', '', 'Pending', 0, '2019-07-24 08:54:50');
+
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `audiometri`
---
-ALTER TABLE `audiometri`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_pasien` (`id_pasien`),
-  ADD KEY `id_dokter` (`id_dokter`);
 
 --
 -- Indexes for table `ekg`
@@ -351,14 +344,16 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `usg`
 --
+ALTER TABLE `usg`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_pasien` (`id_pasien`),
+  ADD KEY `id_dokter` (`id_dokter`);
 
 --
--- AUTO_INCREMENT for table `audiometri`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `audiometri`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ekg`
@@ -409,15 +404,14 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `usg`
 --
+ALTER TABLE `usg`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for table `audiometri`
+-- Constraints for dumped tables
 --
-ALTER TABLE `audiometri`
-  ADD CONSTRAINT `audiometri_ibfk_2` FOREIGN KEY (`id_dokter`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `audiometri_ibfk_3` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`);
 
 --
 -- Constraints for table `ekg`
@@ -453,6 +447,13 @@ ALTER TABLE `rontgen`
 ALTER TABLE `spirometri`
   ADD CONSTRAINT `spirometri_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `spirometri_ibfk_2` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`);
+
+--
+-- Constraints for table `usg`
+--
+ALTER TABLE `usg`
+  ADD CONSTRAINT `usg_ibfk_2` FOREIGN KEY (`id_dokter`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `usg_ibfk_3` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

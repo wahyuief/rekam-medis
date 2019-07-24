@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Audiometri extends CI_Controller {
+class Usg extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
@@ -13,16 +13,16 @@ class Audiometri extends CI_Controller {
 		$data = array(
 			'page' => 'dashboard',
             'title' => 'Dashboard',
-            'data' => $this->mdata->audiometri_all($nik)
+            'data' => $this->mdata->usg_all($nik)
 		);
-		$this->load->view('public/audiometri', $data);
+		$this->load->view('public/usg', $data);
 	}
 	public function print_file($nik, $id)
 	{
 		$this->load->library('pdf');
-		$data['audiometri'] = $this->mdata->per_audiometri($nik, $id);
+		$data['usg'] = $this->mdata->per_usg($nik, $id);
     $this->pdf->setPaper('A4', 'potrait');
     $this->pdf->filename = "report-data-rekam-medis.pdf";
-    $this->pdf->load_view('print_audiometri', $data);
+    $this->pdf->load_view('print_usg', $data);
 	}
 }

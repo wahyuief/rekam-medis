@@ -33,12 +33,12 @@
                 <th width="100">USG</th>
                 <th width="100">Ekg</th>
               </tr>
-              <?php if ($pasien && isset($rontgen) || isset($spirometri) || isset($audiometri) || isset($ekg)) {
+              <?php if ($pasien && isset($rontgen) || isset($spirometri) || isset($usg) || isset($ekg)) {
                 echo '<tr>
                   <td>'.$pasien['nama'].'</td>
                   <td><a href="rontgen/list/'.$pasien['ktp'].'">Lihat</a></td>
                   <td><a href="spirometri/list/'.$pasien['ktp'].'">Lihat</a></td>
-                  <td><a href="audiometri/list/'.$pasien['ktp'].'">Lihat</a></td>
+                  <td><a href="usg/list/'.$pasien['ktp'].'">Lihat</a></td>
                   <td><a href="ekg/list/'.$pasien['ktp'].'">Lihat</a></td>
                 </tr>';
               } else {

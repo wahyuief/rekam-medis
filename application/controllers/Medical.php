@@ -29,7 +29,7 @@ class Medical extends CI_Controller {
 		$namapasien = $this->input->post('namapasien');
 		$rontgen = isset($mcup['rontgen']) ? '1' : '0';
 		$spirometri = isset($mcup['spirometri']) ? '1' : '0';
-		$audiometri = isset($mcup['audiometri']) ? '1' : '0';
+		$usg = isset($mcup['usg']) ? '1' : '0';
 		$ekg = isset($mcup['ekg']) ? '1' : '0';
 		$this->form_validation->set_rules('namapasien', 'Nama Pasien', 'trim|required');
 		if ($this->form_validation->run() === FALSE) {
@@ -48,7 +48,7 @@ class Medical extends CI_Controller {
 				'tanggal' => date('Y-m-d H:i:s')
 			);
 			if($rontgen > 0 ? $this->mtambah->checkup('rontgen', $input) : false);
-			if($audiometri > 0 ? $this->mtambah->checkup('audiometri', $input) : false);
+			if($usg > 0 ? $this->mtambah->checkup('usg', $input) : false);
 			if($spirometri > 0 ? $this->mtambah->checkup('spirometri', $input) : false);
 			if($ekg > 0 ? $this->mtambah->checkup('ekg', $input) : false);
 			redirect(base_url('medical/checkup'));

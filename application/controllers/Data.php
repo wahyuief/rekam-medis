@@ -69,12 +69,12 @@ class Data extends CI_Controller {
 		);
 		$this->load->view('layout_dashboard', $data);
 	}
-	public function audiometri()
+	public function usg()
 	{
 		$data = array(
-			'page' => 'audiometri',
+			'page' => 'usg',
 			'title' => 'USG',
-			'data' => $this->mdata->audiometri()
+			'data' => $this->mdata->usg()
 		);
 		$this->load->view('layout_dashboard', $data);
 	}
@@ -109,13 +109,13 @@ class Data extends CI_Controller {
     $this->pdf->filename = "report-data-rekam-medis.pdf";
     $this->pdf->load_view('print_spirometri', $data);
 	}
-	public function print_audiometri($pasien, $id)
+	public function print_usg($pasien, $id)
 	{
 		$this->load->library('pdf');
-		$data['audiometri'] = $this->mdata->per_audiometri($pasien, $id);
+		$data['usg'] = $this->mdata->per_usg($pasien, $id);
     $this->pdf->setPaper('A4', 'potrait');
     $this->pdf->filename = "report-data-rekam-medis.pdf";
-    $this->pdf->load_view('print_audiometri', $data);
+    $this->pdf->load_view('print_usg', $data);
 	}
 	public function print_ekg($pasien, $id)
 	{

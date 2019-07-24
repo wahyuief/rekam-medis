@@ -38,7 +38,7 @@
                   <td>'.$no++.'</td>
                   <td>'.($rontgen['status'] == 'Selesai' ? '<a href="rontgen/'.$pasien['ktp'].'">'.$rontgen['status'].'</a>' : $rontgen['status']).'</td>
                   <td>'.($spirometri['status'] == 'Selesai' ? '<a href="spirometri/'.$pasien['ktp'].'">'.$spirometri['status'].'</a>' : $spirometri['status']).'</td>
-                  <td>'.($audiometri['status'] == 'Selesai' ? '<a href="audiometri/'.$pasien['ktp'].'">'.$audiometri['status'].'</a>' : $audiometri['status']).'</td>
+                  <td>'.($usg['status'] == 'Selesai' ? '<a href="usg/'.$pasien['ktp'].'">'.$usg['status'].'</a>' : $usg['status']).'</td>
                   <td>'.($ekg['status'] == 'Selesai' ? '<a href="ekg/'.$pasien['ktp'].'">'.$ekg['status'].'</a>' : $ekg['status']).'</td>
                 </tr>';
               } ?>

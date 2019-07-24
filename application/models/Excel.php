@@ -60,11 +60,11 @@ class Excel extends CI_Model {
 	}
 	public function usg()
 	{
-		$this->db->select('audiometri.id as id_audiometri, no_pasien, nama, goldarah, gender, tanggal, status');
-		$this->db->from('audiometri');
-		$this->db->join('pasien', 'audiometri.id_pasien = pasien.id');
-		$this->db->where('audiometri.hapus', '0');
-		$this->db->order_by('audiometri.id', 'ASC');
+		$this->db->select('usg.id as id_usg, no_pasien, nama, goldarah, gender, tanggal, status');
+		$this->db->from('usg');
+		$this->db->join('pasien', 'usg.id_pasien = pasien.id');
+		$this->db->where('usg.hapus', '0');
+		$this->db->order_by('usg.id', 'ASC');
 		$query = $this->db->get();
     return !empty($query)?$query->result():false;
 	}

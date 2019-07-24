@@ -42,9 +42,9 @@ class Mupdate extends CI_Model {
 	{
 		return ($this->db->update('spirometri', $data, ['id' => $id]))?true:false;
 	}
-	public function audiometri($data, $id)
+	public function usg($data, $id)
 	{
-		return ($this->db->update('audiometri', $data, ['id' => $id]))?true:false;
+		return ($this->db->update('usg', $data, ['id' => $id]))?true:false;
 	}
 	public function ekg($data, $id)
 	{

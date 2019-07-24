@@ -44,10 +44,10 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text font-weight-bold text-info text-uppercase mb-1"><a href="<?php echo base_url('data/audiometri') ?>">USG</a></div>
+                      <div class="text font-weight-bold text-info text-uppercase mb-1"><a href="<?php echo base_url('data/usg') ?>">USG</a></div>
                     </div>
                     <div class="col-auto">
-                      <input type="checkbox" name="checkup[]" value="audiometri">
+                      <input type="checkbox" name="checkup[]" value="usg">
                     </div>
                   </div>
                 </div>

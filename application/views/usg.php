@@ -38,8 +38,8 @@
                             Options
                           </button>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="'.base_url('edit/audiometri/').$row['no_pasien']."/".$row['id_audiometri'].'">Edit</a>
-                            <a class="dropdown-item" href="'.base_url('data/print_audiometri/').$row['no_pasien']."/".$row['id_audiometri'].'">Print</a>
+                            <a class="dropdown-item" href="'.base_url('edit/usg/').$row['no_pasien']."/".$row['id_usg'].'">Edit</a>
+                            <a class="dropdown-item" href="'.base_url('data/print_usg/').$row['no_pasien']."/".$row['id_usg'].'">Print</a>
                           </div>
                         </div>
                         </td>
